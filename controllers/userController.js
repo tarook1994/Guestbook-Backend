@@ -22,8 +22,8 @@ exports.login = async (req, res, next) => {
     const token = await user.generateAuthToken();
     return res.status(200).json({ user, token });
   } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+    console.log(JSON.stringify(err.message));
+    res.status(404).json({ error: err.message });
   }
 };
 
@@ -37,9 +37,9 @@ exports.changePassword = async (req, res, next) => {
     req.user.password = newPassword;
     req.user.tokens.splice(0, req.user.tokens.length);
     await req.user.save();
-    res.status(200).json({message:"Changed Password"});
-  } catch(err) {
-    res.status(500).json(err)
+    res.status(200).json({ message: "Changed Password" });
+  } catch (err) {
+    res.status(500).json(err);
   }
 };
 
