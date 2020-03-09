@@ -1,0 +1,19 @@
+{
+  "name": "guestbook-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tarook1994/Guestbook-Backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tarook1994/Guestbook-Backend/issues"
+  },
+  "homepage": "https://github.com/tarook1994/Guestbook-Backend#readme"
+}
