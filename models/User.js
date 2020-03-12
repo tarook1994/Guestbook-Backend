@@ -34,6 +34,13 @@ const userSchema = mongoose.Schema({
     }
   ]
 });
+const handleE11000 = (error, res, next) => {
+  if (error.name === "MongoError" && error.code === 11000) {
+    next(new Error("Duplicate Email. Please use another Email."));
+  } else {
+    next();
+  }
+};
 
 userSchema.pre("save", async function(next) {
   // Hash the password before saving the user model
@@ -43,6 +50,8 @@ userSchema.pre("save", async function(next) {
   }
   next();
 });
+
+userSchema.post("save", handleE11000);
 
 userSchema.methods.generateAuthToken = async function() {
   // Generate an auth token for the user
@@ -57,11 +66,11 @@ userSchema.statics.findByCredentials = async (email, password) => {
   // Search for a user by email and password.
   const user = await User.findOne({ email });
   if (!user) {
-    throw new Error("Invalid login credentials" );
+    throw new Error("Invalid login credentials");
   }
   const isPasswordMatch = await bcrypt.compare(password, user.password);
   if (!isPasswordMatch) {
-    throw new Error( "Invalid login credentials" );
+    throw new Error("Invalid login credentials");
   }
   return user;
 };

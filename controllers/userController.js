@@ -2,13 +2,19 @@ const User = require("../models/User");
 
 exports.createUser = async (req, res, next) => {
   try {
+    const {password, confirmPassword} = req.body;
+    if(password !== confirmPassword) {
+      return res.status(400).json({code: 400, error: "Passwords does not match"})
+    }
     const user = new User(req.body);
     await user.save();
     const token = await user.generateAuthToken();
     res.status(200).json({ user, token });
   } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+    if (err.message) {
+      return res.status(400).json({ code: 400, error: err.message });
+    }
+    return res.status(500).json({ code: 500, error: "Unexpected Error" });
   }
 };
 

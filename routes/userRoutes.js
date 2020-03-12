@@ -1,9 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
+const validator = require("../middleware/validator");
 const auth = require("../middleware/auth");
 
-router.post("/users/create-user", userController.createUser);
+router.post(
+  "/users/create-user",
+  validator.userValidationRulesForCreateUser(),
+  validator.validate,
+  userController.createUser
+);
 router.post("/users/login", userController.login);
 router.get("/users/me", auth, userController.getUserProfile);
 router.put("/users/me/change-password", auth, userController.changePassword);
