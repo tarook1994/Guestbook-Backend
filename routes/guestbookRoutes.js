@@ -7,8 +7,8 @@ const auth = require("../middleware/auth");
 router.post(
   "/guestbook/add-message",
   auth,
-//   validator.validationForCreateMessage(),
-//   validator.validate,
+  validator.validationForCreateMessage(),
+  validator.validate,
   guestbookController.addMessage
 );
 // router.get("/guestbook/all", auth, userController.getUserProfile);

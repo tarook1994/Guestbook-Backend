@@ -6,7 +6,7 @@ const validationForCreateUser = () => {
 };
 const validationForCreateMessage = () => {
   const { check } = expressValidator;
-  return [!check("messageText").isEmpty()];
+  return [check("messageText").notEmpty()];
 };
 const validate = (req, res, next) => {
   const { validationResult } = expressValidator;
