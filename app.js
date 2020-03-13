@@ -4,6 +4,7 @@ const morgan = require("morgan");
 
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/userRoutes");
+const guestbookRoutes = require("./routes/guestbookRoutes");
 const port = process.env.PORT;
 require("./db/db");
 const app = express().use("*", cors());
@@ -25,6 +26,8 @@ app.use(morganInstance);
 app.use(bodyParser.json());
 
 app.use("/api/v1", userRoutes);
+app.use("/api/v1", guestbookRoutes);
+
 
 app.listen(port, async () => {
   console.log(`Connected port ${port}`);

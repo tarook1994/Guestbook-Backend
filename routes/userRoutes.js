@@ -6,7 +6,7 @@ const auth = require("../middleware/auth");
 
 router.post(
   "/users/create-user",
-  validator.userValidationRulesForCreateUser(),
+  validator.validationForCreateUser(),
   validator.validate,
   userController.createUser
 );

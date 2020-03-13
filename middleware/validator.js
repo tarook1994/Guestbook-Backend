@@ -1,10 +1,13 @@
 const expressValidator = require("express-validator");
 
-const userValidationRulesForCreateUser = () => {
+const validationForCreateUser = () => {
   const { check } = expressValidator;
   return [check("email").isEmail(), check("password").isLength({ min: 6 })];
 };
-
+const validationForCreateMessage = () => {
+  const { check } = expressValidator;
+  return [!check("messageText").isEmpty()];
+};
 const validate = (req, res, next) => {
   const { validationResult } = expressValidator;
 
@@ -20,6 +23,7 @@ const validate = (req, res, next) => {
   });
 };
 module.exports = {
-    userValidationRulesForCreateUser,
-    validate,
-  }
+  validationForCreateUser,
+  validationForCreateMessage,
+  validate
+};
