@@ -11,7 +11,7 @@ router.post(
   validator.validate,
   guestbookController.addMessage
 );
-// router.get("/guestbook/all", auth, userController.getUserProfile);
+router.get("/guestbook/all", auth, guestbookController.getAllMessages);
 // router.put("/guestbook/:id", auth, userController.changePassword);
 // router.delete("/guestbook/:id", auth, userController.logout);
 
